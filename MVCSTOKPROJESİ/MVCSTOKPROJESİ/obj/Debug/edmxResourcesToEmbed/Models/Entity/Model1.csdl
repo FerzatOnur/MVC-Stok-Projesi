@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MVC_STOK_VERİTABANIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="KATEGORI_TABLOSU">
+    <Key>
+      <PropertyRef Name="KATEGORIID" />
+    </Key>
+    <Property Name="KATEGORIID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KATEGORIAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="URUN_TABLOSU" Relationship="Self.FK_URUN_TABLOSU_KATEGORI_TABLOSU" FromRole="KATEGORI_TABLOSU" ToRole="URUN_TABLOSU" />
+  </EntityType>
+  <EntityType Name="MUSTERI_TABLOSU">
+    <Key>
+      <PropertyRef Name="MUSTERIID" />
+    </Key>
+    <Property Name="MUSTERIID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MUSTERIAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MUSTERISOYAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="SATIS_TABLOSU" Relationship="Self.FK_SATIS_TABLOSU_MUSTERI_TABLOSU" FromRole="MUSTERI_TABLOSU" ToRole="SATIS_TABLOSU" />
+  </EntityType>
+  <EntityType Name="SATIS_TABLOSU">
+    <Key>
+      <PropertyRef Name="SATISID" />
+    </Key>
+    <Property Name="SATISID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="URUN" Type="Int32" />
+    <Property Name="MUSTERI" Type="Int32" />
+    <Property Name="ADET" Type="Byte" />
+    <Property Name="FIYAT" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="MUSTERI_TABLOSU" Relationship="Self.FK_SATIS_TABLOSU_MUSTERI_TABLOSU" FromRole="SATIS_TABLOSU" ToRole="MUSTERI_TABLOSU" />
+    <NavigationProperty Name="URUN_TABLOSU" Relationship="Self.FK_SATIS_TABLOSU_URUN_TABLOSU" FromRole="SATIS_TABLOSU" ToRole="URUN_TABLOSU" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="URUN_TABLOSU">
+    <Key>
+      <PropertyRef Name="URUNID" />
+    </Key>
+    <Property Name="URUNID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="URUNAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="URUNKATEGORI" Type="Int16" />
+    <Property Name="URUNFIYAT" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="URUNMARKA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="URUNSTOK" Type="Byte" />
+    <NavigationProperty Name="KATEGORI_TABLOSU" Relationship="Self.FK_URUN_TABLOSU_KATEGORI_TABLOSU" FromRole="URUN_TABLOSU" ToRole="KATEGORI_TABLOSU" />
+    <NavigationProperty Name="SATIS_TABLOSU" Relationship="Self.FK_SATIS_TABLOSU_URUN_TABLOSU" FromRole="URUN_TABLOSU" ToRole="SATIS_TABLOSU" />
+  </EntityType>
+  <Association Name="FK_URUN_TABLOSU_KATEGORI_TABLOSU">
+    <End Role="KATEGORI_TABLOSU" Type="Self.KATEGORI_TABLOSU" Multiplicity="0..1" />
+    <End Role="URUN_TABLOSU" Type="Self.URUN_TABLOSU" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KATEGORI_TABLOSU">
+        <PropertyRef Name="KATEGORIID" />
+      </Principal>
+      <Dependent Role="URUN_TABLOSU">
+        <PropertyRef Name="URUNKATEGORI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SATIS_TABLOSU_MUSTERI_TABLOSU">
+    <End Role="MUSTERI_TABLOSU" Type="Self.MUSTERI_TABLOSU" Multiplicity="0..1" />
+    <End Role="SATIS_TABLOSU" Type="Self.SATIS_TABLOSU" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MUSTERI_TABLOSU">
+        <PropertyRef Name="MUSTERIID" />
+      </Principal>
+      <Dependent Role="SATIS_TABLOSU">
+        <PropertyRef Name="MUSTERI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SATIS_TABLOSU_URUN_TABLOSU">
+    <End Role="URUN_TABLOSU" Type="Self.URUN_TABLOSU" Multiplicity="0..1" />
+    <End Role="SATIS_TABLOSU" Type="Self.SATIS_TABLOSU" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="URUN_TABLOSU">
+        <PropertyRef Name="URUNID" />
+      </Principal>
+      <Dependent Role="SATIS_TABLOSU">
+        <PropertyRef Name="URUN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MVC_STOK_VERİTABANIEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="KATEGORI_TABLOSU" EntityType="Self.KATEGORI_TABLOSU" />
+    <EntitySet Name="MUSTERI_TABLOSU" EntityType="Self.MUSTERI_TABLOSU" />
+    <EntitySet Name="SATIS_TABLOSU" EntityType="Self.SATIS_TABLOSU" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="URUN_TABLOSU" EntityType="Self.URUN_TABLOSU" />
+    <AssociationSet Name="FK_URUN_TABLOSU_KATEGORI_TABLOSU" Association="Self.FK_URUN_TABLOSU_KATEGORI_TABLOSU">
+      <End Role="KATEGORI_TABLOSU" EntitySet="KATEGORI_TABLOSU" />
+      <End Role="URUN_TABLOSU" EntitySet="URUN_TABLOSU" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SATIS_TABLOSU_MUSTERI_TABLOSU" Association="Self.FK_SATIS_TABLOSU_MUSTERI_TABLOSU">
+      <End Role="MUSTERI_TABLOSU" EntitySet="MUSTERI_TABLOSU" />
+      <End Role="SATIS_TABLOSU" EntitySet="SATIS_TABLOSU" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SATIS_TABLOSU_URUN_TABLOSU" Association="Self.FK_SATIS_TABLOSU_URUN_TABLOSU">
+      <End Role="URUN_TABLOSU" EntitySet="URUN_TABLOSU" />
+      <End Role="SATIS_TABLOSU" EntitySet="SATIS_TABLOSU" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cdc0b8b3fabb4798a64b444c91457fbe" Name="Diagram1">
+        <EntityTypeShape EntityType="MVC_STOK_VERİTABANIModel.KATEGORI_TABLOSU" Width="1.5" PointX="0.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVC_STOK_VERİTABANIModel.MUSTERI_TABLOSU" Width="1.5" PointX="2.875" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVC_STOK_VERİTABANIModel.SATIS_TABLOSU" Width="1.5" PointX="5.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVC_STOK_VERİTABANIModel.sysdiagrams" Width="1.5" PointX="6.625" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVC_STOK_VERİTABANIModel.URUN_TABLOSU" Width="1.5" PointX="3" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="MVC_STOK_VERİTABANIModel.FK_URUN_TABLOSU_KATEGORI_TABLOSU" ManuallyRouted="false" />
+        <AssociationConnector Association="MVC_STOK_VERİTABANIModel.FK_SATIS_TABLOSU_MUSTERI_TABLOSU" ManuallyRouted="false" />
+        <AssociationConnector Association="MVC_STOK_VERİTABANIModel.FK_SATIS_TABLOSU_URUN_TABLOSU" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
